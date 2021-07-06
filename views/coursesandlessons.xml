@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_courses_tree" model="ir.ui.view">
+            <field name="name">Braincert Courses</field>
+            <field name="model">braincert.courses</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="class_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_courses_form" model="ir.ui.view">
+            <field name="name">Braincert Courses</field>
+            <field name="model">braincert.courses</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="class_id"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True,'no_edit': True}"/>
+                                                </group>
+
+                            <notebook>
+                                 <page string="Teachers">
+                                <field name="teachers" context="{'default_is_teacher':True}">
+                                    <tree editable="bottom">
+                                        <field name="partner_id"/>
+                                        <field name="email"/>
+                                        <field name="is_teacher" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Students">
+                                <field name="students" context="{'default_is_teacher':False}">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="email"/>
+                                        <field name="is_teacher" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_courses" model="ir.actions.act_window">
+            <field name="name">Braincert Courses</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">braincert.courses</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_courses" name="Courses" parent="menu_schedule" action="action_courses" sequence="2"/>
+
+        <!--                                            -->
+
+        <record id="view_lessons_tree" model="ir.ui.view">
+            <field name="name">Braincert Lessons</field>
+            <field name="model">braincert.lessons</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="course_id"/>
+                    <field name="class_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_lessons_form" model="ir.ui.view">
+            <field name="name">Braincert Lessons</field>
+            <field name="model">braincert.lessons</field>
+            <field name="arch" type="xml">
+                <form string="">
+                     <header>
+                        <button name="send_class_launch_url" string="Send Lesson Url" type="object"/>
+
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="course_id" options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True,'no_edit': True}"/>
+                            <field name="class_id"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True,'no_edit': True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_lessons" model="ir.actions.act_window">
+            <field name="name">Braincert Lessons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">braincert.lessons</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_lessons" name="Lessons" parent="menu_schedule" action="action_lessons" sequence="3"/>
+
+
+    </data>
+</odoo>

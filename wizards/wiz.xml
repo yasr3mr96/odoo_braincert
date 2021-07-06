@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_get_available_attendees_form" model="ir.ui.view">
+            <field name="name">Get Available attendees</field>
+            <field name="model">wizard.get_available_attendees</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="class_id" options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True,'no_edit': True}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_pdf" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <act_window id="get_available_attendees_action"
+                    name="Get Available attendees"
+                    res_model="wizard.get_available_attendees"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+
+
+        <menuitem id="menu_braincert_reporing_categ" name="Reporting" parent="menu_braincert_root" sequence="4"/>
+        <menuitem id="menu_get_available_attendees_action" name="Get Available attendees"
+                  parent="menu_braincert_reporing_categ" action="get_available_attendees_action" sequence="2"/>
+
+         <record id="view_get_class_usage_report_form" model="ir.ui.view">
+            <field name="name">Get Class Usage Report</field>
+            <field name="model">wizard.get_class_usage</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="class_id" options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True,'no_edit': True}"/>
+                            <field name="user_id" options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True,'no_edit': True}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_pdf" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <act_window id="get_class_usage_report_action"
+                    name="Get Class Usage Report"
+                    res_model="wizard.get_class_usage"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+
+
+        <menuitem id="menu_get_class_usage_action" name="Get Class Usage Report"
+                  parent="menu_braincert_reporing_categ" action="get_class_usage_report_action" sequence="1"/>
+
+
+    </data>
+</odoo>

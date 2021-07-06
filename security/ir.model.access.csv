@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+braincert.class,braincert.class,model_braincert_class,,1,1,1,1
+braincert.timezone,braincert.timezone,model_braincert_timezone,,1,1,1,1
+braincert.courses,braincert.courses,model_braincert_courses,,1,1,1,1
+braincert.lessons,braincert.lessons,model_braincert_lessons,,1,1,1,1
+braincert.users,braincert.users,model_braincert_users,,1,1,1,1

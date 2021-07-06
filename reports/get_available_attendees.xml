@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+ <template id="get_available_attendees_report_template">
+            <t t-call="web.external_layout">
+                    <div class="page" dir="ltr">
+
+                        <br/>
+                            <table class="table table-bordered" style="border: 1px solid black;">
+                                <thead>
+                                    <th style="border: 1px solid black;" rowspan="2">
+                                        <span>Class Name</span>
+                                    </th>
+                                    <th style="border: 1px solid black;" rowspan="2">
+                                        <span>Remaning Attendees </span>
+                                    </th>
+                                </thead>
+                                <tr>
+                                    <th style="border: 1px solid black;">
+                                        <span t-esc="data.get('class_name')"/>
+                                    </th>
+                                    <th style="border: 1px solid black;">
+                                       <span t-esc="data.get('remaning_attendees')"/>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+            </t>
+        </template>
+
+        <template id="get_available_attendees_report">
+            <t t-call="web.html_container">
+                <t t-call="odoo_braincert.get_available_attendees_report_template" t-lang="user.lang"/>
+            </t>
+        </template>
+        <report
+                id="action_get_available_attendees_report"
+                model="wizard.get_available_attendees"
+                report_type="qweb-pdf"
+                string="Get Available attendees"
+                name="odoo_braincert.get_available_attendees_report"
+                file="odoo_braincert.get_available_attendees_report"
+                attachment_use="False"
+                menu="True"
+        />
+
+<!--       ?>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+         <template id="get_class_usage_report_template">
+            <t t-call="web.external_layout">
+                <t t-foreach="lines" t-as="line">
+                    <div class="page" dir="ltr">
+                        <span>Class Name:<span t-esc="request.env['braincert.class'].search([('class_id','=',line.get('classId'))],limit=1).title"/></span><br/>
+                        <span>User Name:<span t-esc="request.env['braincert.users'].search([('id','=',line.get('userId'))],limit=1).name"/></span><br/>
+                        <span>Duration:<span t-esc="line.get('duration')"/></span><br/>
+                        <span>Percentage:<span t-esc="line.get('percentage')"/></span><br/>
+                        <span>Attendance:<span t-esc="line.get('attendance')"/></span><br/>
+
+                        <br/>
+                        <div>Sessions</div>
+                            <table class="table table-bordered" style="border: 1px solid black;">
+                                <thead>
+                                    <th style="border: 1px solid black;" rowspan="2">
+                                        <span>Time In</span>
+                                    </th>
+                                    <th style="border: 1px solid black;" rowspan="2">
+                                        <span>Time Out Name </span>
+                                    </th>
+
+                                </thead>
+                                <tr t-foreach="line.get('session')" t-as="session">
+                                    <th style="border: 1px solid black;">
+                                        <span t-esc="session.get('time_in')"/>
+                                    </th>
+                                    <th style="border: 1px solid black;">
+                                       <span t-esc="session.get('time_out')"/>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+            </t>
+            </t>
+        </template>
+
+        <template id="get_class_usage_report">
+            <t t-call="web.html_container">
+                <t t-call="odoo_braincert.get_class_usage_report_template" t-lang="user.lang"/>
+            </t>
+        </template>
+        <report
+                id="action_get_class_usage_report"
+                model="wizard.get_class_usage"
+                report_type="qweb-pdf"
+                string="Get Class Usage Report"
+                name="odoo_braincert.get_class_usage_report"
+                file="odoo_braincert.get_class_usage_report"
+                attachment_use="False"
+                menu="True"
+        />
+
+
+    </data>
+</odoo>
